@@ -1,0 +1,70 @@
+{% extends 'header-patient.html'%}
+{% load static %}
+{% block content %}
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+
+            
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <marquee style="color: crimson;">:"{{uid.name}}"- please check & update your profile </marquee>
+                  
+
+                  <h4 class="card-title">PROFILE - PATIENT</h4>
+                  <p class="card-description">
+                
+                  </p>
+                  <form action="{% url 'profile-patient'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">role</label>
+                      <input type="hidden" value="doctor" class="form-control" id="exampleInputName1" placeholder="role" name="role">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="name" name="name"  value="{{uid.name}}">
+                    </div>
+                   
+      
+                      
+                        <label for="exampleInputPassword2" class="col-sm-3 col-form-label">gender</label>
+                        <div class="col-sm-9">
+                             
+                          <select name="gender" class="col-md-9">
+                            {% if uid.gender == 0 %}
+                            <option value=0 selected>Male</option>
+                            <option value=1 >Female</option>
+                            {% else %}
+                            <option value=0 >Male</option>
+                            <option value=1 selected>Female</option>
+                            {% endif %}
+                          </select>
+                      </div>
+                 
+                   
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">address</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" placeholder="address" name="Address" value="{{uid.Address}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="eventInput3">Profile:</label><br>
+                        <img src="{{uid.profile.url}}" alt="" style="height: 100;" width="100">
+                        <input type="file" name="profile" id="">
+                      </div>
+                      
+                      
+                               
+                    <button type="submit" class="btn btn-primary me-2">update</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+        {% endblock%}
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+     

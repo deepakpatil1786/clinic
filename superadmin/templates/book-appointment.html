@@ -1,0 +1,189 @@
+{% extends 'header-patient.html'%}
+{% load static %}
+{% block content %}
+<!-- partial -->
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+
+
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <marquee style="color: crimson;">"{{uid.name}}"- please book your appointment</marquee>
+
+            <!-- <input type="hidden" value="{{book.id}}" id="doc_id"> -->
+            <h4 class="card-title">book appointment</h4>
+            <p class="card-description">
+              DOCTOR
+            </p>
+            <form action="{% url 'create_appointment' %}" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                {% if msg %}
+                <p style="color: red">{{msg}}</p>
+                {% endif %}
+                <label for="exampleInputEmail3">SELECT-DOCTOR</label>
+                <select id="doc" name="doctor_name" class="form-control">
+                  <option value="">-----------------select---------------</option>
+                  {% for x in book%}
+                  <option value="{{x.id}}">{{x.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail3">WEEK-SLOT</label>
+                <select id="week_id" name="weekslot" class="form-control">
+                  <option value="" >-----------------select---------------</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail3">TIME-SLOT</label>
+                <select id="timeslot_id" name="timeslot" class="form-control">
+                  <option value=""></option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail3">DATE</label>
+                <input type="date" name="date">
+              </div>
+
+              <div>
+                <label for="exampleInputEmail3">DESCRIPTION</label>
+                <textarea id="projectinput7" name="decription" class="form-control" rows="5" cols="10"> </textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary me-2">Book</button>
+
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {% endblock%}
+      <!-- content-wrapper ends -->
+      <!-- partial:../../partials/_footer.html -->
+      {% block js %}
+      <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+      <script type="text/javascript">
+        // $(document).ready(function() {
+        $('#doc').change(function () {
+          var optionSelected = $(this).find("option:selected");
+          var valueSelected = optionSelected.val();
+          var doctor = optionSelected.text();
+    
+          // doc ={'doc_n':doctor_name};
+          console.log(valueSelected)
+          $.ajax({
+            type: "GET",
+            url: '{% url "get-slot-list" %}',
+            // data:JSON.stringify(data),
+            data: { 'doc_n': valueSelected },
+            success: function (result) {
+              // console.log(doctor_name);
+              console.log(result, '==========');
+    
+              var secondSelect = $('#week_id');
+              secondSelect.empty();
+              
+    
+              // console.log(Object.values(result.instances), 'eee')
+              var s = Object.values(result.instances)
+              console.log(s,'--------------------------');
+    
+              // console.log(s.length, '===================');
+              let slot = s.map((element) => {
+                return element.weekslot
+              })
+              slot = [...new Set(slot)]
+              // console.log(slot);
+              secondSelect.append($('<option>', { value:'', text:'--------------------------SELECT----------------------------' }));
+              for (i = 0; i < slot.length; i++) {
+                
+                if (slot[i] == 1) {
+                  var weekslot = "Monday"
+                }
+                else if (slot[i] == 2) {
+                  var weekslot = "Tuesday"
+                }
+                else if (slot[i] == 3) {
+                  var weekslot = "Wednesday"
+                }
+                else if (slot[i] == 4) {
+                  var weekslot = "Thursday"
+                }
+                else if (slot[i] == 5) {
+                  var weekslot = "Friday"
+                }
+                else if (slot[i] == 6) {
+                  var weekslot = "Saturday"
+                }
+                else {
+                  var weekslot = "Sunday"
+                }
+                
+                secondSelect.append($('<option>', { value: slot[i], text: weekslot }));
+                // console.log(i, '-=-=-=-=-=-=--=-=');
+    
+              }
+    
+            }
+          });
+        });
+      </script>
+      <script type="text/javascript">
+        // $(document).ready(function() {
+        $('#week_id').change(function () {
+          var optionSelected = $(this).find("option:selected");
+          var valueSelected = optionSelected.val();
+          var doc_select = $('#doc').find("option:selected");
+          var doc_value = doc_select.val();
+          var weeks = optionSelected.text();
+          // console.log(valueSelected)
+          // console.log(doc_value)
+          $.ajax({
+            type: "GET",
+            url: '{% url "get-slot-list" %}',
+            data: { 'week_n': valueSelected, 'doc_v': doc_value },
+            success: function (result) {
+              // console.log(result, '==========');
+    
+              var secondSelect = $('#timeslot_id');
+              secondSelect.empty();
+    
+              // console.log(Object.values(result.instances1), 'eee')
+              var s1 = Object.values(result.instances1)
+              // console.log(s1.length, '==========lengt\=========');
+              for (i = 0; i < s1.length; i++) {
+                if (s1[i].timeslot == 1) {
+                  var timeslot = "10:00 am To 11:00 am"
+                }
+                else if (s1[i].timeslot == 2) {
+                  var timeslot = "11:00 am TO 12:00 pm"
+                }
+                else if (s1[i].timeslot == 3) {
+                  var timeslot = "12:00 pm To 1:00 pm"
+                }
+                else if (s1[i].timeslot == 4) {
+                  var timeslot = "1:00 pm To 02:00 pm"
+                }
+                else if (s1[i].timeslot == 5) {
+                  var timeslot = "02:00 pm To 03:00 pm"
+                }
+                else if (s1[i].timeslot == 6) {
+                  var timeslot = "03:00 pm To 04:00 pm"
+                }
+                else if (s1[i].timeslot == 7) {
+                  var timeslot = "04:00 pm To 05:00 pm"
+                }
+                secondSelect.append($('<option>', { value: s1[i].timeslot, text: timeslot }));
+                // console.log(s1[i].timeslot, '-=-=-=-=-=-=--=-=');
+    
+              }
+    
+            }
+          });
+        });
+      </script>      {% endblock %}

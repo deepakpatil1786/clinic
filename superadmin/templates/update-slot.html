@@ -1,0 +1,174 @@
+{% extends 'header-doctor.html' %}
+{% load static %}
+{% block content %}
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">update slot</h4>
+                  <p class="card-description">
+                    
+                  </p>
+                  <form class="forms-sample"action="{% url 'update-slot' uid.id %}" method="post">
+                    {% csrf_token %}
+                  
+                    
+                      <label for="exampleInputUsername2" class="col-sm-3 col-form-label">WEEK</label>
+                      <div class="col-sm-9">
+                        <select id="projectinput7" name="weekslot" class="form-control">
+                          {% if uid.weekslot == 1 %}
+                          <option value="1" selected>Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% elif uid.weekslot == 2 %}
+                          <option value="1">Monday</option>
+                          <option value="2" selected>Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% elif uid.weekslot == 3 %}
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3" selected>Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% elif uid.weekslot == 4 %}
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4" selected>Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% elif uid.weekslot == 5 %}
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5" selected>Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% elif uid.weekslot == 6 %}
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6" selected>Saturday</option>
+                          <option value="7">Sunday</option>
+                          {% else %}
+                          <option value="1">Monday</option>
+                          <option value="2">Tuesday</option>
+                          <option value="3">Wednesday</option>
+                          <option value="4">Thursday</option>
+                          <option value="5">Friday</option>
+                          <option value="6">Saturday</option>
+                          <option value="7" selected >Sunday</option>
+                          {% endif %}
+                        </select>
+
+                      </div>
+                   
+                    
+                            <label class="col-md-3 label-control" for="projectinput6">Time Slot: </label>
+                            <div class="col-md-9">
+                              <select id="projectinput6" name="timeslot" class="form-control">
+                                {% if uid.timeslot == 1 %}
+                                <option value="1" selected>10:00 am To 11:00 am</option>
+                                <option value="2">11:00 am To 12:00 pm</option>
+                                <option value="3">12:00 pm To 01:00 pm</option>
+                                <option value="4">01:00 pm To 02:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+                                {% elif uid.timeslot == 2 %}
+                                
+                               
+                                <option value="1">10:00 am To 11:00 am</option>
+                                <option value="2" selected>11:00 am TO 12:00 pm</option>
+                                <option value="3">12:00 pm To 01:00 pm</option>
+                                <option value="4">01:00 pm To 02:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+
+                                {% elif uid.timeslot == 3 %}
+                               
+                                <option value="1">10:00 am TO 11:00 am</option>
+                                <option value="2">11:00 am To 12:00 pm</option>
+                                <option value="3" selected>12:00 pm To 01:00 pm</option>
+                                <option value="4">01:00 pm To 02:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+                                {% elif uid.timeslot == 4 %}
+                               
+                                <option value="1">10:00 am TO 11:00 am</option>
+                                <option value="2">11:00 am To 12:00 pm</option>
+                                <option value="3">12:00 pm To 01:00 pm</option>
+                                <option value="4" selected>01:00 am To 2:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+                                {% elif uid.timeslot == 5 %}
+                                
+                                <option value="1">10:00 am TO 11:00 am</option>
+                                <option value="2">11:00 am To 12:00 pm</option>
+                                <option value="3">12:00 pm To 01:00 pm</option>
+                                <option value="4">01:00 pm To 02:00 pm</option>
+                                <option value="5" selected>02:00 am To 03:00 am</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+                                {% elif uid.timeslot == 6 %}
+                               
+                                <option value="1">10:00 am TO 11:00 am</option>
+                                <option value="2">11:00 am To 12:00 pm</option>
+                                <option value="3">12:00 pm To 01:00 pm</option>
+                                <option value="4">01:00 pm To 02:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6" selected>03:00 am To 04:00 am</option>
+                                <option value="7">04:00 pm To 05:00 pm</option>
+
+                                {% else %}
+                                <option value="1">10:00 am To 11:00 am</option>
+                                <option value="2">11:00 am TO 12:00 pm</option>
+                                <option value="3">12:00 pm To 1:00 pm</option>
+                                <option value="4">1:00 pm To 02:00 pm</option>
+                                <option value="5">02:00 pm To 03:00 pm</option>
+                                <option value="6">03:00 pm To 04:00 pm</option>
+                                <option value="7" selected>04:00 pm To 05:00 pm</option>
+                                {% endif %}
+                                
+                              </select>
+                            </div>
+                          </div>
+          
+
+
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>  
+        {% endblock %}
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+     

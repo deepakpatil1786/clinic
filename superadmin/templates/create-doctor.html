@@ -1,0 +1,48 @@
+{% extends 'header.html'%}
+{% load static %}
+{% block content %}
+      <!-- partial -->
+      <div class="main-panel">        
+        <div class="content-wrapper">
+          <div class="row">
+
+            
+            <div class="col-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">create-doctor</h4>
+                  <p class="card-description">
+                    DOCTOR
+                  </p>
+                  {% if msg %}
+                  <p style="color: red;">{{msg}}</p>
+                  {% endif %}
+                  {% if msg1 %}
+                  <p style="color:red">{{msg1}}</p>
+                  {% endif %}
+                  <form action="{% url 'create-doctor'%}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputName1">role</label>
+                      <input type="hidden" value="doctor" class="form-control" id="exampleInputName1" placeholder="role" name="role">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputName1">Name</label>
+                      <input type="text" class="form-control" id="exampleInputName1" placeholder="name" name="name">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail3">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail3" placeholder="email" name="email">
+                    </div>
+                               
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            
+        {% endblock%}
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+     
