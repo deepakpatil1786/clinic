@@ -365,7 +365,7 @@ def get_slot_list(request):
 def view_appointment(request):  #-----view--patient---#
     try:
         uid = User.objects.get(email=request.session['email'])
-        var1 = Appointment.objects.filter(patient_id=uid.id)
+        var1 = Appointment.objects.filter(patient_id=uid.id).order_by('date')
         return render(request,'view-appointment',{'uid':uid,'var1':var1})
     except:
         return redirect('login')
@@ -377,7 +377,7 @@ def view_appointment_admin(request):  #-----view-appointment-to-admin-#
         admin_profile = User.objects.get(email=request.session['email'])
 
         uid = User.objects.get(email=request.session['email'])
-        app1= Appointment.objects.all()
+        app1= Appointment.objects.all().order_by('date')
 
         return render(request,'view-appointment-admin.html',{'uid':uid,'app1':app1,'admin_profile':admin_profile})
     except:
@@ -390,7 +390,7 @@ def view_appointment_doc(request):#---views appointment to doctor--#
         doc_profile = User.objects.get(email=request.session['email'])
 
         uid=User.objects.get(email=request.session['email'])
-        app2 =Appointment.objects.filter(slot__doctor=uid.id)
+        app2 =Appointment.objects.filter(slot__doctor=uid.id).order_by('date')
         return render(request,'view-appointment-doc.html',{'uid':uid,'app2':app2,'doc_profile':doc_profile,'day':day})
     except:
         return redirect('login')
